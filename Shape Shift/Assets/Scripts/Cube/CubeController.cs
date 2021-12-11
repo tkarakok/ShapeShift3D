@@ -33,7 +33,6 @@ public class CubeController : MonoSingleton<CubeController>
             _newDelta = Input.GetAxis("Mouse Y");
             _newScale = new Vector3(Mathf.Clamp(transform.localScale.x - _newDelta, .5f,3), Mathf.Clamp(transform.localScale.y + _newDelta,.5f,3), transform.localScale.z);
             transform.localScale = Vector3.Lerp(transform.localScale, _newScale, _duration);
-            GhostShapeController.Instance.ChangeGhostShapeScale(transform.localScale);
         }
 
 
