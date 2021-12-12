@@ -10,5 +10,17 @@ public class CubeCollisionController : MonoBehaviour
         {
             GhostShapeController.Instance.ChangeGhostPosition();
         }
+        else if (other.CompareTag("Obstacle"))
+        {
+            StateManager.Instance._state = State.GameOver;
+        }
+        else if (other.CompareTag("Finish"))
+        {
+            StateManager.Instance._state = State.EndGame;
+        }
+        else if (other.CompareTag("Coin"))
+        {
+            GameManager.Instance.Coin++;
+        }
     }
 }

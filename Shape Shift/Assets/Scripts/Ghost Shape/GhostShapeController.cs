@@ -15,8 +15,12 @@ public class GhostShapeController : MonoSingleton<GhostShapeController>
 
     private void Update()
     {
-        float distance =  gameObject.transform.position.z - referencePoint.position.z;
-        gameObject.transform.localScale = new Vector3(player.localScale.x,player.localScale.y, distance);
+        if (StateManager.Instance._state == State.InGame)
+        {
+            float distance = gameObject.transform.position.z - referencePoint.position.z;
+            gameObject.transform.localScale = new Vector3(player.localScale.x, player.localScale.y, distance);
+        }
+        
     }
 
     public void ChangeGhostPosition()

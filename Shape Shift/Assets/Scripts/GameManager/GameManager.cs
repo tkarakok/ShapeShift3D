@@ -10,7 +10,8 @@ public class GameManager : MonoSingleton<GameManager>
     public int Coin { get => _coin; set => _coin = value; }
     public int TotalCoin { get => _totalCoin; set => _totalCoin = value; }
 
-    private void Start()
+    
+    public void GetCoin()
     {
         TotalCoin = PlayerPrefs.GetInt("coin");
         UIManager.Instance.inGameCoin.text = Coin.ToString();

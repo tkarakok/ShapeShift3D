@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CubeController : MonoSingleton<CubeController>
+public class CubeController : MonoBehaviour
 {
     #region Properties Move System
 
@@ -17,18 +17,6 @@ public class CubeController : MonoSingleton<CubeController>
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (StateManager.Instance._state != State.InGame)
-            {
-                StateManager.Instance._state = State.InGame;
-            }
-            else
-            {
-                StateManager.Instance._state = State.Pause;
-            }
-        }
-
         if (StateManager.Instance._state == State.InGame)
         {
             #region Cube Movement
@@ -51,7 +39,6 @@ public class CubeController : MonoSingleton<CubeController>
 
             #endregion
         }
-
     }
 
   
