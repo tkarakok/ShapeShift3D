@@ -17,6 +17,7 @@ public class CubeCollisionController : MonoBehaviour
         }
         else if (other.CompareTag("Finish"))
         {
+            PlayerPrefs.SetInt("Level", LevelManager.Instance.CurrentLevel+1);
             StateManager.Instance._state = State.EndGame;
             PlayerPrefs.SetInt("Coin", GameManager.Instance.TotalCoin + GameManager.Instance.Coin);
         }

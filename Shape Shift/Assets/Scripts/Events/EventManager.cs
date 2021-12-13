@@ -36,6 +36,7 @@ public class EventManager : MonoSingleton<EventManager>
         #region EndGame Event Subscribe
         EndGameEvent += UIManager.Instance.EndGame;
         EndGameEvent += UIManager.Instance.UpdateEndGameCoin;
+        EndGameEvent += LevelManager.Instance.GetLevelName;
         #endregion
 
         #region Shop Event Subscribe

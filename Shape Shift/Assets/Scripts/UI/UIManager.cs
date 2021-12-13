@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManager : MonoSingleton<UIManager>
@@ -50,6 +51,17 @@ public class UIManager : MonoSingleton<UIManager>
         StateManager.Instance._state = State.InGame;
         PausePanel.SetActive(false);
         InGamePanel.SetActive(true);
+    }
+
+    public void RestartButton()
+    {
+        LevelManager.Instance.ChangeLevel("Level " + LevelManager.Instance.CurrentLevel);
+    }
+
+    public void NextLevelButton()
+    {
+        Debug.Log(LevelManager.Instance.CurrentLevel);
+        LevelManager.Instance.ChangeLevel("Level " + LevelManager.Instance.CurrentLevel);
     }
     #endregion
 
