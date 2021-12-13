@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CubeController : MonoBehaviour
+public class CubeController : MonoSingleton<CubeController>
 {
     // define player properties
 

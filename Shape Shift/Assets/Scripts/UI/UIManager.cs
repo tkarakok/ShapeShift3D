@@ -9,6 +9,25 @@ public class UIManager : MonoSingleton<UIManager>
     public GameObject MainMenuPanel, InGamePanel, PausePanel, GameOverPanel, EndGamePanel;
     public Text inGameCoin, mainMenuCoinText,endGameEarnedText,endGameTotalCoinText;
 
+    // Define level progressbar elements
+    public Slider levelProgressBar;
+    public GameObject finishLine;
+    private float _maxDistance;
+
+    private void Start()
+    {
+        _maxDistance = finishLine.transform.position.z -  CubeController.Instance.gameObject.transform.position.z;
+    }
+
+    private void Update()
+    {
+        if (StateManager.Instance._state == State.InGame)
+        {
+            float distance = finishLine.transform.position.z - CubeController.Instance.transform.position.z;
+            levelProgressBar.value = 1 - (distance / _maxDistance);
+        }   
+    }
+
     // write functions for UI Button
     #region Button Functions
 
