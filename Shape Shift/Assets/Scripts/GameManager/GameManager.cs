@@ -4,17 +4,19 @@ using UnityEngine;
 
 public class GameManager : MonoSingleton<GameManager>
 {
-    private int _coin = 10;
+    // we define user's coin value
+    private int _coin = 0;
     private int _totalCoin;
 
+    // encapsulation for coin properties
     public int Coin { get => _coin; set => _coin = value; }
     public int TotalCoin { get => _totalCoin; set => _totalCoin = value; }
 
-    
-    public void GetCoin()
+    private void Start()
     {
-        TotalCoin = PlayerPrefs.GetInt("coin");
-        UIManager.Instance.inGameCoin.text = Coin.ToString();
-        UIManager.Instance.mainMenuCoinText.text = TotalCoin.ToString();
+        // we get user's all coin and set the variable
+        TotalCoin = PlayerPrefs.GetInt("Coin");
     }
+
+    
 }

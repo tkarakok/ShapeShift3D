@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CubeCollisionController : MonoBehaviour
 {
+    // we check collision with objects' tags
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Ghost"))
@@ -17,10 +18,12 @@ public class CubeCollisionController : MonoBehaviour
         else if (other.CompareTag("Finish"))
         {
             StateManager.Instance._state = State.EndGame;
+            PlayerPrefs.SetInt("Coin", GameManager.Instance.TotalCoin + GameManager.Instance.Coin);
         }
         else if (other.CompareTag("Coin"))
         {
             GameManager.Instance.Coin++;
+            Destroy(other.gameObject);
         }
     }
 }

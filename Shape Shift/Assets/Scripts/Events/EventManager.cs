@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EventManager : MonoSingleton<EventManager>
 {
+    // create state events and define 
     public delegate void StateActions();
     public event StateActions MainMenuEvent;
     public event StateActions InGameEvent;
@@ -13,11 +14,37 @@ public class EventManager : MonoSingleton<EventManager>
     public event StateActions ShopEvent;
 
 
+    // we subscribe functions to events
     private void Awake()
     {
-        MainMenuEvent += GameManager.Instance.GetCoin;
+        #region MainMenu Event Subscribe
+        MainMenuEvent += UIManager.Instance.GetMainMenuCoin;
+        #endregion
+
+        #region InGame Event Subscribe
+        InGameEvent += UIManager.Instance.UpdateInGameCoin;
+        #endregion
+
+        #region Pause Event Subscribe
+
+        #endregion
+
+        #region GameOver Event Subscribe
+        GameOverEvent += UIManager.Instance.GameOver;
+        #endregion
+
+        #region EndGame Event Subscribe
+        EndGameEvent += UIManager.Instance.EndGame;
+        EndGameEvent += UIManager.Instance.UpdateEndGameCoin;
+        #endregion
+
+        #region Shop Event Subscribe
+
+        #endregion
+
     }
 
+    // after check state we call events in update 
     private void Update()
     {
         if (StateManager.Instance._state == State.MainMenu)

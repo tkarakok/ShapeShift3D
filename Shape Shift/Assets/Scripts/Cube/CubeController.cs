@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CubeController : MonoBehaviour
 {
+    // define player properties
+
     #region Properties Move System
 
     private float _speed = 3;
@@ -19,11 +21,14 @@ public class CubeController : MonoBehaviour
     {
         if (StateManager.Instance._state == State.InGame)
         {
+            // move system for player
             #region Cube Movement
             Vector3 newPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z + _speed * Time.deltaTime);
             transform.position = newPosition;
 
             #endregion
+
+            // shift system for player and ghost object
             #region Shape Shift 
 
             Vector3 _newScale;
