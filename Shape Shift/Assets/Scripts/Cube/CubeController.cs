@@ -7,7 +7,7 @@ public class CubeController : MonoSingleton<CubeController>
     // define player properties
 
     #region Properties Move System
-
+    
     private float _speed = 3;
     #endregion
 
@@ -25,7 +25,7 @@ public class CubeController : MonoSingleton<CubeController>
             #region Cube Movement
             Vector3 newPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z + _speed * Time.deltaTime);
             transform.position = newPosition;
-
+            
             #endregion
 
             // shift system for player and ghost object
