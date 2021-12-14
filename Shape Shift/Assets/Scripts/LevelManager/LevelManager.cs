@@ -19,6 +19,7 @@ public class LevelManager : MonoSingleton<LevelManager>
     public void GetLevelName()
     {
         CurrentLevel = PlayerPrefs.GetInt("Level");
+
     }
 
     public void ChangeLevel(string sceneName)

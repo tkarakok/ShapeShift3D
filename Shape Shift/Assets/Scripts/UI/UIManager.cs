@@ -8,7 +8,7 @@ public class UIManager : MonoSingleton<UIManager>
 {
     // define UI panels in Inspector
     public GameObject MainMenuPanel, InGamePanel, PausePanel, GameOverPanel, EndGamePanel;
-    public Text inGameCoin, mainMenuCoinText,endGameEarnedText,endGameTotalCoinText;
+    public Text inGameCoin, mainMenuCoinText, endGameEarnedText, endGameTotalCoinText, currentLevelText, nextLevelText;
 
     // Define level progressbar elements
     public Slider levelProgressBar;
@@ -17,7 +17,9 @@ public class UIManager : MonoSingleton<UIManager>
 
     private void Start()
     {
-        _maxDistance = finishLine.transform.position.z -  CubeController.Instance.gameObject.transform.position.z;
+        _maxDistance = finishLine.transform.position.z - CubeController.Instance.gameObject.transform.position.z;
+        currentLevelText.text = (LevelManager.Instance.CurrentLevel+1).ToString();
+        nextLevelText.text = (LevelManager.Instance.CurrentLevel+2).ToString();
     }
 
     private void Update()
@@ -26,7 +28,7 @@ public class UIManager : MonoSingleton<UIManager>
         {
             float distance = finishLine.transform.position.z - CubeController.Instance.transform.position.z;
             levelProgressBar.value = 1 - (distance / _maxDistance);
-        }   
+        }
     }
 
     // write functions for UI Button
