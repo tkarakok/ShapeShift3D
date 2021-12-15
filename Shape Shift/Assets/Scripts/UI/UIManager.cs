@@ -7,8 +7,8 @@ using UnityEngine.UI;
 public class UIManager : MonoSingleton<UIManager>
 {
     // define UI panels in Inspector
-    public GameObject MainMenuPanel, InGamePanel, PausePanel, GameOverPanel, EndGamePanel;
-    public Text inGameCoin, mainMenuCoinText, endGameEarnedText, endGameTotalCoinText, currentLevelText, nextLevelText;
+    public GameObject mainMenuPanel, inGamePanel, pausePanel, gameOverPanel, endGamePanel, settingsPanel;
+    public Text inGameCoin, mainMenuCoinText, endGameEarnedText,mainMenuLevelText,inGameLevelText,endGameLevelText;
 
     // Define level progressbar elements
     public Slider levelProgressBar;
@@ -18,8 +18,8 @@ public class UIManager : MonoSingleton<UIManager>
     private void Start()
     {
         _maxDistance = finishLine.transform.position.z - CubeController.Instance.gameObject.transform.position.z;
-        currentLevelText.text = (LevelManager.Instance.CurrentLevel+1).ToString();
-        nextLevelText.text = (LevelManager.Instance.CurrentLevel+2).ToString();
+        mainMenuLevelText.text = "LEVEL " + (LevelManager.Instance.CurrentLevel + 1).ToString();
+        inGameLevelText.text = "LEVEL " + (LevelManager.Instance.CurrentLevel + 1).ToString();
     }
 
     private void Update()
@@ -37,48 +37,59 @@ public class UIManager : MonoSingleton<UIManager>
     public void StartGame()
     {
         StateManager.Instance._state = State.InGame;
-        MainMenuPanel.SetActive(false);
-        InGamePanel.SetActive(true);
+        mainMenuPanel.SetActive(false);
+        inGamePanel.SetActive(true);
     }
 
     public void PauseGame()
     {
         StateManager.Instance._state = State.Pause;
-        InGamePanel.SetActive(false);
-        PausePanel.SetActive(true);
+        inGamePanel.SetActive(false);
+        pausePanel.SetActive(true);
     }
 
     public void ContinoueButton()
     {
         StateManager.Instance._state = State.InGame;
-        PausePanel.SetActive(false);
-        InGamePanel.SetActive(true);
+        pausePanel.SetActive(false);
+        inGamePanel.SetActive(true);
     }
 
     public void RestartButton()
     {
-        LevelManager.Instance.ChangeLevel("Level " + LevelManager.Instance.CurrentLevel);
+        LevelManager.Instance.ChangeLevel("LEVEL " + LevelManager.Instance.CurrentLevel);
     }
 
     public void NextLevelButton()
     {
         Debug.Log(LevelManager.Instance.CurrentLevel);
-        LevelManager.Instance.ChangeLevel("Level " + LevelManager.Instance.CurrentLevel);
+        LevelManager.Instance.ChangeLevel("LEVEL " + LevelManager.Instance.CurrentLevel);
     }
+
+    public void SettingsButton()
+    {
+        settingsPanel.SetActive(true);
+    }
+
+    public void BackButton() 
+    {
+        settingsPanel.SetActive(false);
+    }
+
     #endregion
 
     // write functions for events
     #region Panel Change Functions For Events
     public void GameOver()
     {
-        InGamePanel.SetActive(false);
-        GameOverPanel.SetActive(true);
+        inGamePanel.SetActive(false);
+        gameOverPanel.SetActive(true);
     }
 
     public void EndGame()
     {
-        InGamePanel.SetActive(false);
-        EndGamePanel.SetActive(true);
+        inGamePanel.SetActive(false);
+        endGamePanel.SetActive(true);
     }
     #endregion
 
@@ -97,10 +108,8 @@ public class UIManager : MonoSingleton<UIManager>
     public void UpdateEndGameCoin()
     {
         endGameEarnedText.text = GameManager.Instance.Coin.ToString();
-        endGameTotalCoinText.text = (GameManager.Instance.TotalCoin + GameManager.Instance.Coin).ToString();
+        endGameLevelText.text = "LEVEL " +(LevelManager.Instance.CurrentLevel).ToString();
     }
     #endregion
-
-
 
 }

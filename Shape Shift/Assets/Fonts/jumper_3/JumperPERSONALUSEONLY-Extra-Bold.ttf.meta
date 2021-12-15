@@ -1,0 +1,24 @@
+fileFormatVersion: 2
+guid: 9352f63d008f6ed46b2796d5af26ba51
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Jumper PERSONAL USE ONLY
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 03388e68b0e27b04f9039e446fc6c7d7, type: 3}
+  - {fileID: 12800000, guid: c07f54772d066fd46b5416037cc2d4f6, type: 3}
+  - {fileID: 12800000, guid: 518bfb93a51b50a4295f65f926a5eac7, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

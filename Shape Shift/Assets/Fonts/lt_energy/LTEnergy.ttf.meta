@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 7a2186dd83bbc5e4ea5930551ad220c9
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - LT Energy
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 03ed76dd799b2a14580a671b961166ff, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
