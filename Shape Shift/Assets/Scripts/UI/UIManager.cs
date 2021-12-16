@@ -7,9 +7,9 @@ using UnityEngine.UI;
 public class UIManager : MonoSingleton<UIManager>
 {
     // define UI panels in Inspector
-    public GameObject mainMenuPanel, inGamePanel, pausePanel, gameOverPanel, endGamePanel, settingsPanel;
-    public Text inGameCoin, mainMenuCoinText, endGameEarnedText,mainMenuLevelText,inGameLevelText,endGameLevelText;
-
+    public GameObject mainMenuPanel, inGamePanel, pausePanel, gameOverPanel, endGamePanel, settingsPanel, shopPanel;
+    public Text inGameCoin, mainMenuCoinText, endGameEarnedText,mainMenuLevelText,inGameLevelText,endGameLevelText,shopPanelCoinText;
+    public Button buyButton;
     // Define level progressbar elements
     public Slider levelProgressBar;
     public GameObject finishLine;
@@ -74,6 +74,22 @@ public class UIManager : MonoSingleton<UIManager>
     public void BackButton() 
     {
         settingsPanel.SetActive(false);
+    }
+
+    public void OpenShop()
+    {
+        StateManager.Instance._state = State.Shop;
+        if (GameManager.Instance.TotalCoin >= 500)
+        {
+            buyButton.interactable = true;
+        }
+        shopPanelCoinText.text = GameManager.Instance.TotalCoin.ToString();
+        shopPanel.SetActive(true);
+    }
+    public void CloseShop()
+    {
+        StateManager.Instance._state = State.MainMenu;
+        shopPanel.SetActive(false);
     }
 
     #endregion

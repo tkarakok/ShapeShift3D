@@ -70,7 +70,7 @@ public class EventManager : MonoSingleton<EventManager>
         }
         else if (StateManager.Instance._state == State.Shop)
         {
-            ShopEvent();
+            //ShopEvent();
         }
     }
 }
