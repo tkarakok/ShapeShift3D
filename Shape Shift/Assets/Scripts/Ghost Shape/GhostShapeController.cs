@@ -12,7 +12,7 @@ public class GhostShapeController : MonoSingleton<GhostShapeController>
     // we equate the position of this object to the first obstacle  
     private void Start()
     {
-        transform.position = new Vector3(transform.position.x,transform.position.y, ghostPositions[_currentPosition].position.z);
+        transform.position = new Vector3(transform.position.x, transform.position.y, ghostPositions[_currentPosition].position.z);
     }
 
     private void Update()

@@ -13,7 +13,13 @@ public class CubeCollisionController : MonoBehaviour
         }
         else if (other.CompareTag("Obstacle"))
         {
-            StateManager.Instance._state = State.GameOver;
+            // StateManager.Instance._state = State.GameOver;
+            Rigidbody rigidbody = other.gameObject.GetComponent<Rigidbody>();
+            rigidbody.AddForce(Random.Range(-5, 5), Random.Range(30, 50), Random.Range(-5, 5) * 40);
+            rigidbody.useGravity = true;
+            other.gameObject.GetComponent<BoxCollider>().isTrigger = false;
+            gameObject.GetComponent<Rigidbody>().AddForce(Vector3.back * 40);
+            StartCoroutine(ChangeLayer(other.gameObject));
         }
         else if (other.CompareTag("Finish"))
         {
@@ -27,4 +33,12 @@ public class CubeCollisionController : MonoBehaviour
             Destroy(other.gameObject);
         }
     }
+
+    IEnumerator ChangeLayer(GameObject gameObject)
+    {
+        yield return new WaitForSeconds(.1f);
+        gameObject.layer = 3;
+    }
+
+
 }

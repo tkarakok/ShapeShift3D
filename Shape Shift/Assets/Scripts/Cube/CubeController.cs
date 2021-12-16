@@ -37,7 +37,7 @@ public class CubeController : MonoSingleton<CubeController>
             if (Input.GetMouseButton(0))
             {
                 _newDelta = Input.GetAxis("Mouse Y");
-                _newScale = new Vector3(Mathf.Clamp(transform.localScale.x - _newDelta, .5f, 3), Mathf.Clamp(transform.localScale.y + _newDelta, .5f, 3), transform.localScale.z);
+                _newScale = new Vector3(Mathf.Clamp(transform.localScale.x - _newDelta, .2f, 1.6f), Mathf.Clamp(transform.localScale.y + _newDelta, .2f, 1.6f), transform.localScale.z);
                 transform.localScale = Vector3.Lerp(transform.localScale, _newScale, _duration);
             }
 
