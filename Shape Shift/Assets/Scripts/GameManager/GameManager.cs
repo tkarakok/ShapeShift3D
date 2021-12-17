@@ -7,10 +7,12 @@ public class GameManager : MonoSingleton<GameManager>
     // we define user's coin value
     private int _coin = 0;
     private int _totalCoin;
+    
 
     // encapsulation for coin properties
     public int Coin { get => _coin; set => _coin = value; }
     public int TotalCoin { get => _totalCoin; set => _totalCoin = value; }
+    
 
     private void Start()
     {

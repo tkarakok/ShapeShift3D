@@ -11,14 +11,23 @@ public class CubeCollisionController : MonoBehaviour
         {
             GhostShapeController.Instance.ChangeGhostPosition();
         }
+        else if (other.CompareTag("GhostObstacle"))
+        {
+            GameObject ghostObstacle = other.transform.GetChild(0).gameObject;
+            ghostObstacle.SetActive(true);
+            ghostObstacle.transform.position += Vector3.up * 3 * Time.deltaTime;
+            StartCoroutine(Anim(ghostObstacle));
+            StartCoroutine(DestroyGhostObstacle(ghostObstacle));
+            
+        }
         else if (other.CompareTag("Obstacle"))
         {
-            // StateManager.Instance._state = State.GameOver;
+            other.transform.parent.transform.Find("GhostPosition").gameObject.tag = "Untagged";
             Rigidbody rigidbody = other.gameObject.GetComponent<Rigidbody>();
             rigidbody.AddForce(Random.Range(-5, 5), Random.Range(30, 50), Random.Range(-5, 5) * 40);
             rigidbody.useGravity = true;
             other.gameObject.GetComponent<BoxCollider>().isTrigger = false;
-            gameObject.GetComponent<Rigidbody>().AddForce(Vector3.back * 40);
+            gameObject.GetComponent<Rigidbody>().AddForce(Vector3.back * 100);
             StartCoroutine(ChangeLayer(other.gameObject));
         }
         else if (other.CompareTag("Finish"))
@@ -40,5 +49,27 @@ public class CubeCollisionController : MonoBehaviour
         gameObject.layer = 3;
     }
 
+    IEnumerator DestroyGhostObstacle(GameObject gameObject)
+    {
+        yield return new WaitForSeconds(.25f);
+        gameObject.SetActive(false);
+    }
 
+    IEnumerator Anim(GameObject gameObject)
+    {
+        while (gameObject.activeInHierarchy)
+        {
+            if (gameObject.transform.localScale.x > gameObject.transform.localScale.x)
+            {
+                gameObject.transform.localScale += new Vector3(.01f, .035f, .01f);
+               
+            }
+            else
+            {
+                gameObject.transform.localScale += new Vector3(.035f, .01f, .01f);
+            }
+            gameObject.transform.position += Vector3.up * Time.deltaTime;
+            yield return new WaitForSeconds(.01f);
+        }
+    }
 }
