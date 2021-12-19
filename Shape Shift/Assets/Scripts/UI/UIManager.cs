@@ -7,9 +7,10 @@ using UnityEngine.UI;
 public class UIManager : MonoSingleton<UIManager>
 {
     // define UI panels in Inspector
-    public GameObject mainMenuPanel, inGamePanel, pausePanel, gameOverPanel, endGamePanel, settingsPanel, shopPanel;
-    public Text inGameCoin, mainMenuCoinText, endGameEarnedText,mainMenuLevelText,inGameLevelText,endGameLevelText,shopPanelCoinText;
+    public GameObject mainMenuPanel, inGamePanel, pausePanel, gameOverPanel, endGamePanel, settingsPanel, shopPanel,perfectText;
+    public Text inGameCoin, mainMenuCoinText, mainMenuLevelText,inGameLevelText, endGameTotalText, endGameLevelText, endGameEarnedText, shopPanelCoinText;
     public Button buyButton;
+
     // Define level progressbar elements
     public Slider levelProgressBar;
     public GameObject finishLine;
@@ -62,18 +63,19 @@ public class UIManager : MonoSingleton<UIManager>
 
     public void NextLevelButton()
     {
-        Debug.Log(LevelManager.Instance.CurrentLevel);
         LevelManager.Instance.ChangeLevel("LEVEL " + LevelManager.Instance.CurrentLevel);
     }
 
     public void SettingsButton()
     {
+        mainMenuPanel.GetComponent<Animator>().SetBool("Clicked", true);
         settingsPanel.SetActive(true);
     }
 
     public void BackButton() 
     {
         settingsPanel.SetActive(false);
+        mainMenuPanel.GetComponent<Animator>().SetBool("Clicked", false);
     }
 
     public void OpenShop()
@@ -86,8 +88,10 @@ public class UIManager : MonoSingleton<UIManager>
         shopPanelCoinText.text = GameManager.Instance.TotalCoin.ToString();
         shopPanel.SetActive(true);
     }
+
     public void CloseShop()
     {
+        shopPanel.GetComponent<Animator>().SetBool("ShopMenu", false);
         StateManager.Instance._state = State.MainMenu;
         shopPanel.SetActive(false);
     }
@@ -113,6 +117,7 @@ public class UIManager : MonoSingleton<UIManager>
     #region UI Update 
     public void GetMainMenuCoin()
     {
+        
         mainMenuCoinText.text = GameManager.Instance.TotalCoin.ToString();
     }
 
@@ -124,7 +129,24 @@ public class UIManager : MonoSingleton<UIManager>
     public void UpdateEndGameCoin()
     {
         endGameEarnedText.text = GameManager.Instance.Coin.ToString();
+        endGameTotalText.text = PlayerPrefs.GetInt("Coin").ToString();
         endGameLevelText.text = "LEVEL " +(LevelManager.Instance.CurrentLevel).ToString();
+    }
+    #endregion
+
+    #region Text Animations Controller
+    public void PerfectTextAnimation()
+    {
+        inGamePanel.GetComponent<Animator>().SetBool("Perfect", true);
+        perfectText.SetActive(true);
+        StartCoroutine(ClosePerfectText());
+    }
+    IEnumerator ClosePerfectText()
+    {
+        yield return new WaitForSeconds(.32f);
+        inGamePanel.GetComponent<Animator>().SetBool("Perfect", false);
+        perfectText.SetActive(false);
+
     }
     #endregion
 

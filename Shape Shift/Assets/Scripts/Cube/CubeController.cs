@@ -16,6 +16,8 @@ public class CubeController : MonoSingleton<CubeController>
     private float _duration = 5;
     #endregion
 
+    public Animator animator;
+
 
     private void Update()
     {
