@@ -8,11 +8,12 @@ public class UIManager : MonoSingleton<UIManager>
 {
     // define UI panels in Inspector
     public GameObject mainMenuPanel, inGamePanel, pausePanel, gameOverPanel, endGamePanel, settingsPanel, shopPanel,perfectText;
-    public Text inGameCoin, mainMenuCoinText, mainMenuLevelText,inGameLevelText, endGameTotalText, endGameLevelText, endGameEarnedText, shopPanelCoinText;
+    public Text inGameCoin, mainMenuCoinText, mainMenuLevelText,inGameLevelText, endGameTotalText, endGameLevelText, endGameEarnedText, shopPanelCoinText,currentPerfectText;
     public Button buyButton;
 
+
     // Define level progressbar elements
-    public Slider levelProgressBar;
+    public Slider levelProgressBar,boostBar;
     public GameObject finishLine;
     private float _maxDistance;
 

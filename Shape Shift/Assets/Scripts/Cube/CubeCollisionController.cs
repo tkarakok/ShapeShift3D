@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CubeCollisionController : MonoBehaviour
 {
-    
+    bool perfect = true;
     // we check collision with objects' tags
     private void OnTriggerEnter(Collider other)
     {
@@ -15,16 +15,31 @@ public class CubeCollisionController : MonoBehaviour
 
         else if (other.CompareTag("GhostObstacle"))
         {
+            
+            if (perfect)
+            {
+                GameManager.Instance.Perfect++;
+                UIManager.Instance.boostBar.value += .33f;
+                UIManager.Instance.currentPerfectText.text = GameManager.Instance.Perfect.ToString();
+                if (GameManager.Instance.Perfect >= 3)
+                {
+                    GameManager.Instance.Perfect = 0;
+                    CubeController.Instance.Speed += 3;
+                    StartCoroutine(SpeedNormalize());
+                }
+            }
             UIManager.Instance.PerfectTextAnimation();
             GameObject ghostObstacle = other.transform.GetChild(0).gameObject;
             ghostObstacle.SetActive(true);
             ghostObstacle.transform.position += Vector3.up * 3 * Time.deltaTime;
             StartCoroutine(Anim(ghostObstacle));
             StartCoroutine(DestroyGhostObstacle(ghostObstacle));
+            perfect = true;
         }
 
         else if (other.CompareTag("Obstacle"))
         {
+            perfect = false;
             Rigidbody rigidbody = other.gameObject.GetComponent<Rigidbody>();
             rigidbody.AddForce(Random.Range(-5, 5), Random.Range(30, 50), Random.Range(-5, 5) * 40);
             rigidbody.useGravity = true;
@@ -55,6 +70,15 @@ public class CubeCollisionController : MonoBehaviour
     {
         yield return new WaitForSeconds(.1f);
         gameObject.layer = 3;
+    }
+
+    IEnumerator SpeedNormalize()
+    {
+        yield return new WaitForSeconds(3);
+        CubeController.Instance.Speed = 3;
+        UIManager.Instance.currentPerfectText.text = 0.ToString();
+        UIManager.Instance.boostBar.value = 0;
+        StopCoroutine(SpeedNormalize());
     }
 
     IEnumerator DestroyGhostObstacle(GameObject gameObject)

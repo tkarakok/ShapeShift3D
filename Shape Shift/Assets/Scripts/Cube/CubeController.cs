@@ -9,14 +9,15 @@ public class CubeController : MonoSingleton<CubeController>
     #region Properties Move System
     
     private float _speed = 3;
+    public float Speed { get => _speed; set => _speed = value; }
     #endregion
 
     #region Shape Shift Properties
 
     private float _duration = 5;
-    #endregion
 
-    public Animator animator;
+   
+    #endregion
 
 
     private void Update()
@@ -25,7 +26,7 @@ public class CubeController : MonoSingleton<CubeController>
         {
             // move system for player
             #region Cube Movement
-            Vector3 newPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z + _speed * Time.deltaTime);
+            Vector3 newPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z + Speed * Time.deltaTime);
             transform.position = newPosition;
             
             #endregion
