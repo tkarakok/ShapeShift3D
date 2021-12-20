@@ -16,8 +16,12 @@ public class CameraController : MonoBehaviour
 
     private void LateUpdate()
     {
-        Vector3 targetPosition = _target.position + _offset;
-        transform.position = targetPosition;
+        if (StateManager.Instance._state == State.InGame)
+        {
+
+            Vector3 targetPosition = _target.position + _offset;
+            transform.position = targetPosition;
+        }
         
     }
 }

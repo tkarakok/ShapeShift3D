@@ -5,6 +5,7 @@ using UnityEngine;
 public class CubeCollisionController : MonoBehaviour
 {
     bool perfect = true;
+
     // we check collision with objects' tags
     private void OnTriggerEnter(Collider other)
     {
@@ -15,18 +16,21 @@ public class CubeCollisionController : MonoBehaviour
 
         else if (other.CompareTag("GhostObstacle"))
         {
-            
+
             if (perfect)
             {
                 GameManager.Instance.Perfect++;
-                UIManager.Instance.boostBar.value += .33f;
-                UIManager.Instance.currentPerfectText.text = GameManager.Instance.Perfect.ToString();
-                if (GameManager.Instance.Perfect >= 3)
+                if (GameManager.Instance.Perfect < 4)
                 {
-                    GameManager.Instance.Perfect = 0;
-                    CubeController.Instance.Speed += 3;
-                    StartCoroutine(SpeedNormalize());
+                    if (GameManager.Instance.Perfect == 3)
+                    {
+                        CubeController.Instance.Speed += 3;
+                        StartCoroutine(SpeedNormalize());
+                    }
+                    UIManager.Instance.boostBar.value += .33f;
+                    UIManager.Instance.currentPerfectText.text = GameManager.Instance.Perfect.ToString();
                 }
+               
             }
             UIManager.Instance.PerfectTextAnimation();
             GameObject ghostObstacle = other.transform.GetChild(0).gameObject;
@@ -52,9 +56,9 @@ public class CubeCollisionController : MonoBehaviour
         {
             GameObject childObject = gameObject.transform.GetChild(0).gameObject;
             childObject.transform.parent = null;
-            childObject.transform.localScale = new Vector3(1, .8f,.2f);
+            childObject.transform.localScale = new Vector3(1, .8f, .2f);
             childObject.GetComponent<Animator>().SetBool("IsFinish", true);
-            PlayerPrefs.SetInt("Level", LevelManager.Instance.CurrentLevel+1);
+            PlayerPrefs.SetInt("Level", LevelManager.Instance.CurrentLevel + 1);
             StateManager.Instance._state = State.EndGame;
             PlayerPrefs.SetInt("Coin", GameManager.Instance.TotalCoin + GameManager.Instance.Coin);
         }
@@ -66,6 +70,8 @@ public class CubeCollisionController : MonoBehaviour
         }
     }
 
+
+    #region Numerators 
     IEnumerator ChangeLayer(GameObject gameObject)
     {
         yield return new WaitForSeconds(.1f);
@@ -75,17 +81,18 @@ public class CubeCollisionController : MonoBehaviour
     IEnumerator SpeedNormalize()
     {
         yield return new WaitForSeconds(3);
+
+        GameManager.Instance.Perfect = 0;
         CubeController.Instance.Speed = 3;
         UIManager.Instance.currentPerfectText.text = 0.ToString();
         UIManager.Instance.boostBar.value = 0;
-        StopCoroutine(SpeedNormalize());
     }
 
     IEnumerator DestroyGhostObstacle(GameObject gameObject)
     {
         yield return new WaitForSeconds(.35f);
         gameObject.SetActive(false);
-       
+
     }
     IEnumerator ClosePerfectText(GameObject gameObject)
     {
@@ -110,6 +117,8 @@ public class CubeCollisionController : MonoBehaviour
             yield return new WaitForSeconds(.01f);
         }
     }
+    #endregion
 
-    
+
+
 }

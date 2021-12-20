@@ -28,6 +28,10 @@ public class CubeController : MonoSingleton<CubeController>
             #region Cube Movement
             Vector3 newPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z + Speed * Time.deltaTime);
             transform.position = newPosition;
+            if (transform.position.y < 0)
+            {
+                StateManager.Instance._state = State.GameOver;
+            }
             
             #endregion
 
