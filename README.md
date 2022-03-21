@@ -1,2 +1,24 @@
-# ShapeShift3D
- 
+
+# SHAPE SHIFT
+
+A HYPER DAILY GAME LIKE JELLY SHIFT
+
+
+
+## GAMEPLAY VIDEO
+
+
+[![IMAGE ALT TEXT HERE](https://i.imgur.com/fRBtsS3.png)](https://youtu.be/U03aGbaNkMY)
+
+
+
+
+## WHAT I USE IN THE PROJECT
+
+**ENGINE:** UNITY 3D
+
+**LANGUAGE:** C#
+
+**ASSETS:** UNITY ASSET STORE
+
+  
